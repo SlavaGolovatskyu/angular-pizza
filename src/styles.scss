@@ -1,1 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
+.d-flex {
+  display: flex;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.g-1 {
+  gap: 4px;
+}
+
+.g-2 {
+  gap: 8px;
+}
+
+.g-4 {
+  gap: 16px;
+}
+
+.font-body-1 {
+  font-family: 'Proxima Nova';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 17px;
+}

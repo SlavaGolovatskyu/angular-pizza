@@ -1,0 +1,13 @@
+<div
+  *ngIf="isOpen"
+  class="dropdown-container"
+>
+  <div
+    *ngFor="let item of items"
+    class="dropdown-item"
+    [ngClass]="{'active': activeItem === item}"
+    (click)="handleSelectItem(item)"
+  >
+    {{ item }}
+  </div>
+</div>

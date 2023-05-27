@@ -1,0 +1,31 @@
+.dropdown-container {
+  position: absolute;
+  right: 0;
+  width: 132px;
+  max-height: 136px;
+  overflow-y: auto;
+  background: #FFFFFF;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.09);
+  border-radius: 10px;
+  top: 25px;
+}
+
+.dropdown-item {
+  padding: 10px 14px;
+  font-family: 'Proxima Nova';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+  }
+}
+
+.active {
+  background: rgba(254, 95, 30, 0.05);
+  color: #FE5F1E;
+}

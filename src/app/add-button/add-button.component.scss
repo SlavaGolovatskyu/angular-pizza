@@ -1,0 +1,37 @@
+.add-pizza-button {
+  padding: 11px 18px;
+  background: #FE5F1E;
+  border: 1px solid #FE5F1E;
+  border-radius: 30px;
+  font-family: 'Proxima Nova';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  &:hover:not(.active) {
+    filter: brightness(90%);
+  }
+}
+
+.active {
+  background-color: transparent;
+  color: #FE5F1E;
+}
+
+.ordered-pizza-count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  min-height: 22px;
+  border-radius: 50%;
+  background: #FE5F1E;
+  color: white;
+  padding: 3px;
+}

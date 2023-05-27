@@ -1,0 +1,28 @@
+.basket-button {
+  background: #FE5F1E;
+  border-radius: 30px;
+  padding: 15px 23px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover {
+    filter: brightness(92%);
+  }
+}
+
+.basket-button-text {
+  font-family: 'Proxima Nova';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  color: #FFFFFF;
+}
+
+.basket-divider {
+  width: 1px;
+  height: 25px;
+  background: rgba(255, 255, 255, 0.25);
+  margin: 0px 13px;
+}

@@ -1,0 +1,11 @@
+<div class="pizzas-list-container">
+  <app-pizzas-item
+    *ngFor="let pizza of pizzasList"
+    [imageUrl]="pizza.imageUrl"
+    [name]="pizza.title"
+    [id]="pizza.id"
+    [sizes]="pizza.sizes"
+    [types]="pizza.types"
+    [price]="pizza.price"
+  ></app-pizzas-item>
+</div>
