@@ -1,4 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
+import { Store, select } from '@ngrx/store';
+import { Subject, mergeMap } from 'rxjs';
+import { AppState } from 'src/app/reducers';
+import { addPizza } from 'src/app/reducers/pizzas/pizzas.actions';
+import { PizzaItem } from 'src/app/reducers/pizzas/pizzas.reducer';
+import { getSelectedPizzasByType } from 'src/app/reducers/pizzas/pizzas.selectors';
 
 type PizzaTypes = {
   [key: number]: string,
@@ -15,6 +21,8 @@ const types: PizzaTypes = {
   styleUrls: ['./pizzas-item.component.scss']
 })
 export class PizzasItemComponent {
+  constructor(private store: Store<AppState>) {}
+
   @Input()
   imageUrl?: string;
   @Input()
@@ -35,14 +43,41 @@ export class PizzasItemComponent {
 
   selectSize(size: number) {
     this.currentSize = size;
+    this.handleChangeTypeAndSize();
   }
 
   selectType(type: number) {
     this.currentType = type;
+    this.handleChangeTypeAndSize();
   }
 
-  updateCount(count: number) {
-    this.orderedCount = count;
+  handleChangeTypeAndSize() {
+    const selectedPizzas = this.store.pipe(select(
+      getSelectedPizzasByType(
+        {
+          pizza: {
+            id: this.id,
+            type: this.currentType,
+            size: this.currentSize,
+            price: this.price,
+          },
+        }
+      )
+    ))
+
+    selectedPizzas.subscribe((pizzas: PizzaItem[]) => {
+      this.orderedCount = pizzas.length;
+    }).unsubscribe();
+  }
+
+  updateCount() {
+    const selectedPizza: PizzaItem = {
+      id: this.id,
+      type: this.currentType,
+      size: this.currentSize,
+      price: this.price,
+    };
+    this.store.dispatch(addPizza({ pizza: selectedPizza }));
   }
 
   ngOnInit() {

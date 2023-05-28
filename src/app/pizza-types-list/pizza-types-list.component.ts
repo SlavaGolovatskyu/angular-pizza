@@ -1,20 +1,10 @@
 import { Component } from '@angular/core';
-
-type PizzaType = {
-  name: string,
-  category: number,
-}
-
-const sortTypes = ['популярности', 'по цене', 'по алфавиту'];
-
-const pizzaTypes = [
-  { name: 'Все', category: 0 },
-  { name: "Мясные", category: 1 },
-  { name: "Вегетарианская", category: 2 },
-  { name: "Гриль", category: 3 },
-  { name: "Острые", category: 4 },
-  { name: "Закрытые", category: 5 },
-];
+import { Store, select } from '@ngrx/store';
+import { PizzaType, SORT_TYPES, pizzaTypes, sortTypes } from '../reducers/pizzas/pizzas.reducer';
+import { getPizzasCategory, getSortBy } from '../reducers/pizzas/pizzas.selectors';
+import { AppState } from '../reducers';
+import { changePizzaCategory, changeSortBy } from '../reducers/pizzas/pizzas.actions';
+import { Observable, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-pizza-types-list',
@@ -22,21 +12,29 @@ const pizzaTypes = [
   styleUrls: ['./pizza-types-list.component.scss']
 })
 export class PizzaTypesListComponent {
-  activeType: string = pizzaTypes[0].name;
-  activeSortBy = sortTypes[0];
+  destroy$: Observable<boolean> = new Subject();
+  activeType: PizzaType = pizzaTypes[0];
+  activeSortBy: string = sortTypes[0];
   sortByTypes: string[] = sortTypes;
   pizzaTypesList: PizzaType[] = pizzaTypes;
   isSortByDropdownOpen: boolean = false;
 
-  handleChangeDropdownState(isOpen: boolean) {
-    this.isSortByDropdownOpen = isOpen;
+  constructor(private store: Store<AppState>) {}
+
+  handleChangeCategory(type: PizzaType) {
+    this.store.dispatch(changePizzaCategory(type));
   }
 
-  handleChangeType(newType: string) {
-    this.activeType = newType;
+  handleChangeSortBy(sortBy: SORT_TYPES) {
+    this.store.dispatch(changeSortBy({ sortBy }));
   }
 
-  handleChangeSortBy(sortBy: string) {
-    this.activeSortBy = sortBy;
+  ngOnInit() {
+    this.store.pipe(select(getPizzasCategory)).subscribe((category: PizzaType) => {
+      this.activeType = category;
+    });
+    this.store.pipe(select(getSortBy)).subscribe((sortBy: SORT_TYPES) => {
+      this.activeSortBy = sortBy;
+    });
   }
 }

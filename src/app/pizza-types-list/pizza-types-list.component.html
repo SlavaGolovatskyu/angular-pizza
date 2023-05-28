@@ -2,27 +2,27 @@
   <div class="pizza-types-list">
     <app-pizza-type-button
       *ngFor="let pizzaType of pizzaTypesList"
-      [pizzaTypeName]="pizzaType.name"
-      [active]="activeType === pizzaType.name"
-      (changeActive)="handleChangeType($event)">
+      [pizzaType]="pizzaType"
+      [active]="activeType.name === pizzaType.name"
+      (changeActive)="handleChangeCategory($event)">
     </app-pizza-type-button>
   </div>
   <div
     class="d-flex"
     style="position: relative;"
-    (clickOutside)="handleChangeDropdownState(false)"
+    (clickOutside)="isSortByDropdownOpen=false"
   >
     <p class="font-body-1 sort-by-text" style="width: 105px;">Сортировка по: </p>
     <p
       class="font-body-1 selected-type-of-sort"
       style="cursor: pointer;"
-      (click)="handleChangeDropdownState(!isSortByDropdownOpen)"
+      (click)="isSortByDropdownOpen=!isSortByDropdownOpen"
     >{{ activeSortBy }}</p>
     <app-dropdown
       [items]="sortByTypes"
       [activeItem]="activeSortBy"
       [isOpen]="isSortByDropdownOpen"
-      (changeOpenState)="handleChangeDropdownState($event)"
+      (changeOpenState)="isSortByDropdownOpen=$event"
       (changeItem)="handleChangeSortBy($event)"
     ></app-dropdown>
   </div>

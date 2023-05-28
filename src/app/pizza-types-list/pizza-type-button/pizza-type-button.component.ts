@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { PizzaType } from 'src/app/reducers/pizzas/pizzas.reducer';
 
 @Component({
   selector: 'app-pizza-type-button',
@@ -7,13 +8,13 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class PizzaTypeButtonComponent {
   @Input()
-  pizzaTypeName: string = '';
+  pizzaType!: PizzaType;
   @Input()
   active: boolean = false;
   @Output()
-  changeActive = new EventEmitter<string>();
+  changeActive = new EventEmitter<PizzaType>();
 
-  handleChange(newType: string) {
+  handleChange(newType: PizzaType) {
     this.changeActive.emit(newType);
   }
 }

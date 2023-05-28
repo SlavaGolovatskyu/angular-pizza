@@ -13,11 +13,11 @@ export class DropdownComponent {
   @Input()
   items: string[] = [];
   @Output()
-  changeItem = new EventEmitter<string>();
+  changeItem = new EventEmitter<any>();
   @Output()
   changeOpenState = new EventEmitter<boolean>();
 
-  handleSelectItem(item: string) {
+  handleSelectItem(item: any) {
     this.changeOpenState.emit(false);
     this.changeItem.emit(item);
   }
